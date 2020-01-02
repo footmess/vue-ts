@@ -1,26 +1,44 @@
 {
   "compilerOptions": {
+    //编译输出目标es版本
     "target": "esnext",
+    //采用的模块系统
     "module": "esnext",
+    //以严格模式解析
     "strict": true,
     "jsx": "preserve",
+    //从tslib导入外部帮助库
     "importHelpers": true,
+    //如何处理模块
     "moduleResolution": "node",
+    //启用装饰器
     "experimentalDecorators": true,
     "esModuleInterop": true,
+    //允许编译JS
+    "allowJs": true,
+    //允许从没有设置默认导出的模块中默认导入
     "allowSyntheticDefaultImports": true,
+    //忽略this的类型检查
+    "noImplicitThis": false,
+    //是否包含可以用于debug的sourceMap
     "sourceMap": true,
+    //解析非相对模块名的基准目录
     "baseUrl": ".",
+    //给错误和消息设置样式，使用颜色和上下文
+    "pretty": true,
+    //设置引入的定义文件
     "types": [
       "webpack-env",
       "mocha",
       "chai"
     ],
+    //指定特殊模块的路径
     "paths": {
       "@/*": [
         "src/*"
       ]
     },
+    //编译过程中需要引入的库文件
     "lib": [
       "esnext",
       "dom",
@@ -28,13 +46,15 @@
       "scripthost"
     ]
   },
+  //ts管理的文件
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./src/**/*.vue",
+    "./tests/**/*.ts",
+    "./tests/**/*.tsx"
   ],
+  //ts排除的文件
   "exclude": [
     "node_modules"
   ]
