@@ -14,9 +14,9 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { Route } from 'vue-router'
 import Nav from '@/components/nav.vue'
-import Slider from '@/components/Slider.vue'
-import Footer from '@/components/Footer.vue'
-import ArrowUp from '@/components/ArrowUp.vue'
+import Slider from '@/components/slider.vue'
+import Footer from '@/components/footer.vue'
+import ArrowUp from '@/components/arrowUp.vue'
 import { isMobile } from '@/utils/utils'
 
 //移动端rem单位适配

@@ -55,7 +55,7 @@ export interface ParamsArchive {
 	article: number;
 	tag_id: string;
 	category_id: string;
-	pageName: number;
+	pageNum: number;
 	pageSize: number;
 }
 

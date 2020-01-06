@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Home from '../views/home.vue';
 
 Vue.use(VueRouter);
 
+// 路由懒加载先等等 ，后续采坑
 const routes = [
 	{
 		path: '/',

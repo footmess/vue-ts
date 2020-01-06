@@ -1,11 +1,12 @@
 <template>
 	<div>
+		<!-- pc布局 -->
 		<div v-if="!isMobile" class="nav">
 			<div class="nav-content">
 				<el-row :gutter="20">
 					<el-col :span="3">
 						<router-link to="/">
-							<img src="@/assets/logo.png" alt="" />
+							<img class="logo" src="@/assets/logo.png" alt="" />
 						</router-link>
 					</el-col>
 					<el-col :span="16">
@@ -69,11 +70,12 @@
 				</el-row>
 			</div>
 		</div>
+		<!-- 移动端布局 -->
 		<div v-else class="nav">
 			<div class="nav-mobile">
 				<div class="nav-mobile-logo">
 					<router-link to="/">
-						<img src="@/assets/logo.png" alt=""
+						<img class="logo fl" src="@/assets/logo.png" alt=""
 					/></router-link>
 				</div>
 				<div class="title">{{ title }}</div>
@@ -136,6 +138,7 @@
 			:class="{ 'mask-fade-out': leaveSlideDown }"
 			@click="handleHideMenu"
 		></div>
+		<!-- 登录注册组件 -->
 		<RegisterAndLogin
 			:visible="visible"
 			:isMobile="isMobile"
@@ -339,4 +342,148 @@ export default class Nav extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.nav-mobile {
+	display: flex;
+	line-height: 60px;
+	.nav-mobile-logo {
+		flex: 1;
+		margin-top: 5px;
+		margin-left: 10px;
+	}
+	.title {
+		flex: 3;
+		font-size: 24px;
+	}
+	.menu {
+		flex: 1;
+		font-size: 34px;
+		color: #409eff;
+	}
+}
+.nav-mobile-content {
+	font-size: 0.3rem;
+	height: 7.3rem;
+	width: 100%;
+	background-color: #fff;
+	.list {
+		.item {
+			line-height: 0.8rem;
+			color: #303133;
+			border-bottom: 1px solid #eee;
+			a {
+				display: block;
+				width: 100%;
+				color: #409eff;
+				text-decoration-line: none;
+			}
+		}
+	}
+}
+.nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	width: 100%;
+	border-bottom: 1px solid #eee;
+	background-color: #fff;
+	.nav-content {
+		width: 1200px;
+		margin: 0 auto;
+	}
+	.logo {
+		height: 50px;
+		margin: 0;
+		border-radius: 50%;
+		margin-top: 5px;
+	}
+	.el-menu .el-menu--horizontal {
+		border-bottom: none;
+	}
+	.el-menu-horizontal > .el-menu-item {
+		cursor: pointer;
+		color: #333;
+	}
+	.nav-right {
+		position: relative;
+		padding-top: 15px;
+		text-align: right;
+		.el-dropdown {
+			cursor: pointer;
+			padding-right: 60px;
+		}
+		.user-img {
+			position: absolute;
+			top: -15px;
+			right: 0;
+			width: 50px;
+			border-radius: 50%;
+		}
+	}
+}
+.enter-slideUp,
+.leave-slideDown {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1011;
+}
+.enter-slideUp {
+	overflow: auto;
+	visibility: visible;
+	z-index: 1001;
+	// forwards让动画保持在最后的效果 to/100%定义的属性
+	// 对应animation-fill-mode 属性  值:forwards backwords both none
+	animation: slideUp 0.3s forwards;
+}
+.leave-slideDown {
+	visibility: visible;
+	z-index: 1001;
+	animation: slideDown 0.3s forwards;
+}
+@keyframes slideUp {
+	from {
+		// 等价于translateY(100%)
+		// 3d正方向 右下前
+		transform: translate3d(0, 100%, 0);
+		opacity: 0.1;
+	}
+	to {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+}
+@keyframes slideDown {
+	from {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+	to {
+		transform: translate3d(0, 100%, 0);
+		opacity: 0.1;
+	}
+}
+.mask {
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	opacity: 0.5;
+}
+.mask-fade-out {
+	animation: maskFadeOut 0.4s forwards;
+}
+@keyframes maskFadeOut {
+	from {
+		opacity: 0.5;
+	}
+	to {
+		opacity: 0;
+	}
+}
 </style>

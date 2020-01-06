@@ -80,7 +80,7 @@ import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import config from '@/utils/config'
 import { RegAndLogParams, UserInfo } from '@/types/index'
 
-// @Component
+@Component
 export default class RegisterAndLogin extends Vue {
 	//ts !表示非null 非undefined
 	@Prop({ default: false }) visible!: boolean
@@ -113,8 +113,8 @@ export default class RegisterAndLogin extends Vue {
 		let preventHistory: object = {
 			name: this.$route.name,
 			query: this.$route.query
-        }
-        //存储json对象前需要转为字符串
+		}
+		//存储json对象前需要转为字符串
 		window.sessionStorage.preventHistory = JSON.stringify(preventHistory)
 		//导航到GitHub授权页面
 		window.location.href = `${config.oauth_url}?client_id=${config.client_id}&redirect_url=${config.redirect_url}`
