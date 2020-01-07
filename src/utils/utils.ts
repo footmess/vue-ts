@@ -105,6 +105,7 @@ export function getDocumentHeight() {
 
 //获取页面浏览器视口的高度
 export function getWindowHeight() {
+	//标准模式
 	if (document.compatMode === 'CSS1Compat') {
 		return document.documentElement.clientHeight;
 	}

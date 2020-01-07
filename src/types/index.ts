@@ -126,7 +126,7 @@ export interface ArticleDetailIF {
 }
 
 export interface ArticleDetailParams {
-	id: string | string[];
+	id: string | (string | null)[];
 	type: number;
 }
 

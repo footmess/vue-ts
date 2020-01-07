@@ -1,0 +1,242 @@
+<template>
+	<div style="width:100%">
+		<div class="article clearfix">
+			<div
+				v-show="!isLoading"
+				:style="{ width: isMobile ? '100%' : '75%' }"
+				class="article-left fl"
+			>
+				<div class="header">
+					<h1 class="title">{{ articleDetail.title }}</h1>
+					<div class="author">
+						<div class="avatar">
+							<img class="auth-logo" src="@/assets/userLogo.jpeg" alt="" />
+						</div>
+						<div class="info">
+							<span class="name"
+								><span>{{ articleDetail.author }}}</span></span
+							>
+							<div
+								props-data-classes="user-follow-button-header"
+								data-author-follow-button=""
+							/>
+							<div class="meta">
+								<span class="public-time">
+									{{
+										articleDetail.create_time
+											? timestampToTime(articleDetail.create_time)
+											: ''
+									}}
+								</span>
+								<span class="wordage">字数{{ articleDetail.numbers }}</span>
+								<span class="views-count"
+									>阅读{{ articleDetail.meta.views }}</span
+								>
+								<span class="comments-count"
+									>评论{{ articleDetail.meta.comments }}</span
+								>
+								<span class="likes-count"
+									>字数{{ articleDetail.meta.likes }}</span
+								>
+							</div>
+						</div>
+						<div class="tags" title="标签">
+							<el-tag
+								size="mini"
+								v-for="(tag, index) in articleDetail.tags"
+								:key="index"
+								type="success"
+								class="tag"
+								>{{ tag.name }}</el-tag
+							>
+						</div>
+						<span class="clearfix"></span>
+					</div>
+				</div>
+				<div class="content">
+					<div
+						class="article-detail"
+						id="content"
+						v-html="articleDetail.content"
+					></div>
+				</div>
+				<div class="heart">
+					<el-button
+						type="danger"
+						size="large"
+						icon="heart"
+						:loading="isLoading"
+						@click="likeArticle"
+						>点赞</el-button
+					>
+				</div>
+				<div class="comment">
+					<el-input
+						placeholder="文明社会，理性评论"
+						type="textarea"
+						v-model="content"
+					></el-input>
+					<el-button
+						type="primary"
+						style="margin-top:15px"
+						:loading="btnLoading"
+						@click="handleAddComment"
+						>发送</el-button
+					>
+				</div>
+				<!-- 父组件传递数据，监听事件 -->
+				<CommentList
+					v-if="!isLoading"
+					:numbers="articleDetail.meta.comments"
+					:list="articleDetail.comments"
+					:article_id="articleDetail._id"
+					@refreshArticle="refreshArticle"
+				/>
+			</div>
+			<div
+				class="article-right fr anchor"
+				v-if="!isMobile"
+				style="width:23%"
+				v-html="articleDetail.toc"
+			></div>
+			<LoadingCustom v-if="isLoading"></LoadingCustom>
+		</div>
+	</div>
+</template>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import { isMobile, timestampToTime } from '@/utils/utils'
+import LoadingCustom from '@/components/loading.vue'
+import CommentList from '@/components/commentList.vue'
+import { ArticleDetailIF, LikeParams, ArticleDetailParams } from '@/types/index'
+
+@Component({
+	components: {
+		LoadingCustom,
+		CommentList
+	}
+})
+export default class ArticleDetail extends Vue {
+	private btnLoading: boolean = false
+	private isLoadEnd: boolean = false
+	private isLoading: boolean = false
+	private isMobile: boolean = isMobile()
+	private content: string = ''
+	private params: ArticleDetailParams = {
+		id: '',
+		//文章类型 => 1: 普通文章，2: 简历，3: 管理员介绍
+		type: 1
+	}
+	private articleDetail: ArticleDetailIF = {
+		toc: '',
+		_id: '',
+		author: 'sun',
+		category: [],
+		comments: [],
+		create_time: '',
+		desc: '',
+		content: '',
+		id: 16,
+		img_url: '',
+		numbers: 0,
+		keyword: [],
+		like_users: [],
+		meta: { views: 0, likes: 0, comments: 0 },
+		origin: 0,
+		state: 1,
+		tags: [],
+		title: '',
+		update_time: ''
+    }
+    
+    //缓存时间
+    private cacheTime:number = 0
+    //评论次数
+    private times:number = 0
+    //点赞次数
+    private likeTimes:number = 0
+
+    mounted ():void {
+        this.params.id = this.$route.query.article_id
+        if(this.$route.path === '/about') {
+            this.params.type = 3
+        }
+        this.handleSearch()
+    }
+
+    refreshArticle():void {
+        this.handleSearch()
+    }
+
+    //提交评论
+    private async handleAddComment():Promise<void> {
+        if(!this.articleDetail._id) {
+            this.$message({
+                message:'该文章不存在',
+                type:'error'
+            })
+            return
+        }
+        if(this.times > 2) {
+            this.$message({
+                message:'您今天留言的次数已经用完，明天再来留言吧!',
+                type:'warning'
+            })
+            return
+        }
+
+        //记录评论时间
+        let now = new Date()
+        let nowTime = now.getTime()
+        if(nowTime - this.cacheTime < 4000) {
+            this.$message({
+                message:'您评论太过频繁，1 分钟后再来留言吧！',
+                type:'warning'
+            })
+            return
+        }
+
+        if(!this.content) {
+            this.$message({
+                message:'请输入内容',
+                type:'warning'
+            })
+            return
+        }
+
+        //查看session中是否存在用户信息
+        let user_id = ''
+        if(sessionStorage.userInfo) {
+            let userInfo = JSON.parse(sessionStorage.userInfo)
+            user_id = userInfo._id
+        }else {
+            this.$message({
+                message:'登录才能评论，请先登录',
+                type:'warning'
+            })
+            return
+        }
+
+        this.btnLoading = true
+        await this.$https.post(this.$urls.addComment,{
+            article_id:this.articleDetail._id,
+            user_id,
+            content:this.content
+        })
+        //提交完毕
+        this.btnLoading = false
+        this.times++
+        this.cacheTime = nowTime
+        this.content = ''
+        this.$message({
+            message:"操作成功",
+            type:'success'
+        })
+        this.handleSearch()
+    }
+
+    
+}
+</script>
+<style lang="scss" scoped>
+</style>
