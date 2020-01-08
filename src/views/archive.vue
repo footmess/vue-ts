@@ -21,7 +21,7 @@
 					>
 						<h3 class="title">{{ im.title }}</h3>
 					</router-link>
-					<p>{{ timestampToTime(im.create_time) }}</p>
+					<p>{{ formatTime(im.create_time) }}</p>
 				</el-timeline-item>
 			</el-timeline-item>
 		</el-timeline>

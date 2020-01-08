@@ -5,6 +5,9 @@ import Home from '../views/home.vue';
 Vue.use(VueRouter);
 
 // 路由懒加载先等等 ，后续采坑
+// 设置路由懒加载 加载首页时会加载全部路由组件
+// 默认情况下，一个 Vue CLI 应用会为所有作为 async chunk 生成的 JavaScript 文件 (通过动态 import() 按需 code splitting 的产物) 自动生成 prefetch 提示。
+// https://cli.vuejs.org/zh/guide/html-and-static-assets.html#preload
 const routes = [
 	{
 		path: '/',

@@ -14,8 +14,8 @@
 						<div class="content">
 							<h4>{{ item.title }}</h4>
 							<p>{{ item.content }}</p>
-							<span>{{ timestampToTime(item.start_time) }}--</span>
-							<span>{{ timestampToTime(item.end_time) }}</span>
+							<span>{{ formatTime(item.start_time) }}--</span>
+							<span>{{ formatTime(item.end_time) }}</span>
 						</div>
 					</el-card>
 				</a>

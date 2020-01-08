@@ -9,8 +9,10 @@ module.exports = {
 	//eslint-loader是否在保存的时候检查
 	lintOnSave: false,
 	//webpack配置
-	// see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
-	chainWebpack: () => {},
+	// see https://github.com/vuejs/vue-cli/blob/dev/docs/guide/webpack.md
+	chainWebpack: (config) => {
+		config.plugins.delete('prefetch');
+	},
 	configureWebpack: (config) => {
 		if (process.env.NODE_ENV === 'production') {
 			//为生成环境修改配置
@@ -19,6 +21,27 @@ module.exports = {
 			//为开发环境修改配置
 			config.mode = 'development';
 		}
+		// 开启分离js
+		config.optimization = {
+			runtimeChunk: 'single',
+			splitChunks: {
+				chunks: 'all',
+				maxInitialRequests: Infinity,
+				minSize: 20000,
+				cacheGroups: {
+					vendor: {
+						test: /[\\/]node_modules[\\/]/,
+						name(module) {
+							// get the name. E.g. node_modules/packageName/not/this/part.js
+							// or node_modules/packageName
+							const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+							// npm package names are URL-safe, but some servers don't like @ symbols
+							return `npm.${packageName.replace('@', '')}`;
+						}
+					}
+				}
+			}
+		};
 		Object.assign(config, {
 			//开发和生产环境共同配置
 			resolve: {

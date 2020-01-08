@@ -12,8 +12,8 @@
 					<h3>{{ item.title }}</h3>
 					<p>{{ item.content }}</p>
 					<p>
-						<span>{{ timestampToTime(item.start_time) }}--</span>
-						<span>{{ timestampToTime(item.end_time) }}</span>
+						<span>{{ formatTime(item.start_time) }}--</span>
+						<span>{{ formatTime(item.end_time) }}</span>
 					</p>
 				</el-card>
 			</el-timeline-item>

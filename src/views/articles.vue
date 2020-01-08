@@ -20,7 +20,7 @@
 								<span>评论 {{ article.meta.comments }}</span>
 								<span>赞 {{ article.meta.likes }}</span>
 								<span v-if="article.create_time" class="time">{{
-									timestampToTime(article.create_time)
+									formatTime(article.create_time)
 								}}</span>
 							</div>
 						</div>

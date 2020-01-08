@@ -35,7 +35,7 @@
 		<div class="introduce">
 			<div class="title">野狼disco</div>
 			<div class="content">
-				<img src="@/assets/tony.png" alt="前端小白" />
+				<img src="@/assets/user.png" alt="前端小白" />
 			</div>
 		</div>
 		<div class="classification">
