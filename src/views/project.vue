@@ -8,7 +8,7 @@
 				:key="index"
 				style="maring-bottom:20px"
 			>
-				<a :href="item.url" target="_blank" ref="noopener noreferrer">
+				<a :href="item.url" target="_blank" rel="noopener noreferrer">
 					<el-card shadow="hover">
 						<img :src="item.img" alt="" class="image" />
 						<div class="content">
@@ -86,18 +86,18 @@ export default class Project extends Vue {
 </script>
 <style lang="scss" scoped>
 .project {
-  overflow: hidden;
-  padding: 40px 0;
-  .el-col-pointer {
-    cursor: pointer;
-  }
-  .content p {
-    height: 70px;
-    text-overflow: ellipsis;
-  }
-  .image {
-    width: 100%;
-    height: 250px;
-  }
+	overflow: hidden;
+	padding: 40px 0;
+	.el-col-pointer {
+		cursor: pointer;
+	}
+	.content p {
+		height: 70px;
+		text-overflow: ellipsis;
+	}
+	.image {
+		width: 100%;
+		height: 250px;
+	}
 }
 </style>

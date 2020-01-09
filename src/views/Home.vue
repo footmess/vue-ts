@@ -11,17 +11,23 @@
 				<div class="list">
 					<router-link class="link" to="/articles">文章</router-link>
 					<router-link class="link" to="/project">项目</router-link>
+					<!-- 超链接 target="_blank" 要增加 rel="nofollow noopener noreferrer" 来堵住钓鱼安全漏洞。
+					如果你在链接上使用 target="_blank"属性，并且不加上rel="noopener"属性，
+					那么你就让用户暴露在一个非常简单的钓鱼攻击之下。
+					新页面可以通过 window.opener获取到源页面的部分控制权
+					window.opener.location.href = 恶意网站
+					 -->
 					<a
 						href="https://github.com/footmess"
 						target="_blank"
-						ref="noopener noreferrer"
+						rel="noopener noreferrer"
 						class="link"
 						>github</a
 					>
 					<a
 						href="https://juejin.im/user/5dce57696fb9a0203161f2be"
 						target="_blank"
-						ref="noopener noreferrer"
+						rel="noopener noreferrer"
 						class="link"
 						>掘金</a
 					>
@@ -33,7 +39,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-declare var document: Document | any
+// declare var document: Document | any
 
 @Component
 export default class Home extends Vue {

@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>vue-ts</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but vue-ts doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="">
+  <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <!-- 在某些情况下，出于一些原因,想要控制页面发送给 server 的 referer 信息的情况下，可以使用这 referer metadata 参数
+  (也可以用h5属性a标签rel=”noreferrer” 去掉refer)。 -->
+  <meta name="referrer" id="referrer" content="always">
+  <meta name="keywords" id="keywords" content="vue ts node">
+  <meta name="description" id="description" content="测试">
+  <meta name="author" content="tony">
+  <meta name="theme-color" content="#fff">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>vue-ts</title>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but vue-ts doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app">
+    <!-- 首屏加载动画 -->
+    <div style="text-align: center; height: 300px; margin-top: 15%">
+      <img src="./img/loading.svg" width="250" alt="加载中..." />
+    </div>
+  </div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>
