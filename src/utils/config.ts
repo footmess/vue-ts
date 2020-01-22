@@ -7,7 +7,7 @@ interface Config {
 
 const config: Config = {
 	oauth_url: 'https://github.com/login/oauth/authorize',
-	redirect_url: 'my-url/login',
+	redirect_url: 'http://39.106.93.60/login',
 	client_id: 'my-info',
 	client_secret: 'my-secret'
 };

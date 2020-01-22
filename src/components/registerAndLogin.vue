@@ -1,6 +1,6 @@
 <template>
 	<el-dialog
-		title="登录"
+		:title="handleFlag === 'register'?'注册':'登录'"
 		:width="isMobile ? '90%' : '50%'"
 		:visible="dialogVisible"
 		@close="cancel"

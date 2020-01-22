@@ -12,14 +12,14 @@ let service: AxiosInstance | any;
 if (process.env.NODE_ENV === 'development') {
 	service = axios.create({
 		//api的base_url
-		baseURL: '/api',
+		baseURL: 'http://39.106.93.60:9527/api/',
 		//请求超时时间
 		timeout: 50000
 	});
 } else {
 	//生产环境
 	service = axios.create({
-		baseURL: '/api',
+		baseURL: 'http://39.106.93.60:9527/api/',
 		timeout: 50000
 	});
 }

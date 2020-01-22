@@ -7,6 +7,7 @@ import './plugins/index.ts';
 import service from './utils/https';
 import urls from './utils/urls';
 import mixin from './mixins';
+import { Message } from 'element-ui';
 // import './filter';
 
 Vue.mixin(mixin);
@@ -14,6 +15,7 @@ Vue.mixin(mixin);
 // 其他页面在使用 axios||urls 的时候直接  this.$https||urls就可以了
 Vue.prototype.$https = service;
 Vue.prototype.$urls = urls;
+Vue.prototype.$message = Message;
 
 Vue.config.productionTip = false;
 

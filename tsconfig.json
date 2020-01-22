@@ -30,7 +30,7 @@
     "types": [
       "webpack-env",
       "mocha",
-      "chai"
+      "chai",
     ],
     //指定特殊模块的路径
     "paths": {
