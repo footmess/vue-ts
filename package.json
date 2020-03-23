@@ -33,6 +33,9 @@
 		"@vue/test-utils": "1.0.0-beta.29",
 		"babel-plugin-component": "^1.1.1",
 		"chai": "^4.1.2",
+		"commitizen": "^4.0.3",
+		"conventional-changelog": "^3.1.18",
+		"cz-conventional-changelog": "^3.1.0",
 		"eslint": "^5.16.0",
 		"eslint-plugin-prettier": "^3.1.1",
 		"eslint-plugin-vue": "^5.0.0",
@@ -41,5 +44,10 @@
 		"sass-loader": "^8.0.0",
 		"typescript": "~3.5.3",
 		"vue-template-compiler": "^2.6.10"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
 	}
 }
