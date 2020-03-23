@@ -8,6 +8,7 @@ import service from './utils/https';
 import urls from './utils/urls';
 import mixin from './mixins';
 import { Message } from 'element-ui';
+import '@assets/styles/index.scss';
 // import './filter';
 
 Vue.mixin(mixin);

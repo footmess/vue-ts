@@ -12,6 +12,8 @@ module.exports = {
 	// see https://github.com/vuejs/vue-cli/blob/dev/docs/guide/webpack.md
 	chainWebpack: (config) => {
 		config.plugins.delete('prefetch');
+		config.module.rule('pug').test(/\.pug/).use('pug-html-loader').loader('pug-html-loader').end();
+		// config.resolve.alias.set('@assets', 'src/assets');
 	},
 	configureWebpack: (config) => {
 		if (process.env.NODE_ENV === 'production') {
@@ -50,6 +52,7 @@ module.exports = {
 				alias: {
 					//__dirname获取当前项目的绝对路径
 					'@': path.resolve(__dirname, './src'),
+					'@assets': path.resolve(__dirname, './src/assets'),
 					vue$: 'vue/dist/vue.js'
 				}
 			}
@@ -64,7 +67,11 @@ module.exports = {
 		//是否开启css source maps
 		sourceMap: false,
 		//css预设器配置项
-		loaderOptions: {},
+		loaderOptions: {
+			sass: {
+				prependData: `@import "@/assets/styles/variable.scss";`
+			}
+		},
 		//是否启用css module for all css/pre-processor files
 		modules: false
 	},

@@ -71,8 +71,8 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
-@import url('./style/index.scss');
-@import url('./style/mobile.scss');
+// @import url('./style/index.scss');
+// @import url('./style/mobile.scss');
 #app {
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
