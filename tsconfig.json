@@ -9,6 +9,8 @@
     "jsx": "preserve",
     //从tslib导入外部帮助库
     "importHelpers": true,
+    // 变量是否需要初始化
+    "strictPropertyInitialization": false,
     //如何处理模块
     "moduleResolution": "node",
     //启用装饰器

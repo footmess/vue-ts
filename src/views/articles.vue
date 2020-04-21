@@ -28,8 +28,8 @@
 				</li>
 			</transition-group>
 		</ul>
-		<LoadingCustom v-if="isLoading"></LoadingCustom>
-		<LoadEnd v-if="isLoadEnd"></LoadEnd>
+		<loading-custom v-if="isLoading" />
+		<load-end v-if="isLoadEnd" />
 	</div>
 </template>
 <script lang="ts">
